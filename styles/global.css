@@ -347,6 +347,7 @@ a {
   margin-left: 0.5em;
   border: none;
   background-color: transparent;
+  color: var(--textColor);
 }
 
 .cart-heading .heading {
