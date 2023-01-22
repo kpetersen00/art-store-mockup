@@ -1,8 +1,8 @@
 const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+import { urlFor } from '../../lib/client';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    console.log(req.body);
     try {
       const params = {
         submit_type: 'pay',
@@ -13,19 +13,13 @@ export default async function handler(req, res) {
           const {
             defaultProductVariant: { images, price, title },
           } = item;
-          const img = images[0].asset._ref;
-          const newImg = img
-            .replace(
-              'image-',
-              'https://cdn.sanity.io/images/c2ld0k9u/production/'
-            )
-            .replace('-jpg', '.jpg');
+          const img = urlFor(images[0]);
           return {
             price_data: {
               currency: 'USD',
               product_data: {
                 name: title,
-                images: [newImg],
+                images: [img],
               },
               unit_amount: price * 100,
             },

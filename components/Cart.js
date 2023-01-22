@@ -6,6 +6,7 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import { useStateContext } from '../context/Statecontext';
 import { toast } from 'react-hot-toast';
 import { loadStripe } from '@stripe/stripe-js';
+import Image from 'next/image';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -76,10 +77,20 @@ const Cart = () => {
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className='product' key={item._id}>
-                <img
+                <div className='cart-image-container'>
+                  <Image
+                    src={urlFor(item.defaultProductVariant.images[0])}
+                    alt={item.title}
+                    layout='fill'
+                    objectFit='contain'
+                    objectPosition='center'
+                    className='cart-product-image'
+                  />
+                  {/* <img
                   src={urlFor(item.defaultProductVariant.images[0])}
                   className='cart-product-image'
-                />
+                  /> */}
+                </div>
                 <div className='item-desc'>
                   <h5>{item.title}</h5>
                   <h4>${item.defaultProductVariant.price}</h4>

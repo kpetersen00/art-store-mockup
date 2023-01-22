@@ -1,5 +1,6 @@
 import React from 'react';
 import { client, urlFor } from '../../lib/client';
+import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { Product } from '../../components';
@@ -17,11 +18,22 @@ const ProductDetails = ({ product, products }) => {
     setShowCart(true);
   };
 
+  console.log(urlFor(images[0]));
+
   return (
     <div>
       <div className='product-details-container'>
         <div className='image-container'>
-          <img src={urlFor(images[0])} className='product-detail-image' />
+          <Image
+            // width={10000}
+            // height={10000}
+            layout='fill'
+            objectFit='contain'
+            objectPosition='center'
+            alt={title}
+            src={urlFor(images[0])}
+            className='product-detail-image'
+          />
         </div>
         <div className='product-details-desc'>
           <h1>{title}</h1>
