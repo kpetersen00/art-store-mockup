@@ -11,8 +11,8 @@ const FooterBanner = ({
         <Image
           src={urlFor(image)}
           layout='fill'
-          // objectFit='cover'
-          // objectPosition='center'
+          objectFit='cover'
+          objectPosition='center'
           alt='hero image'
           className='hero-image'
         />
